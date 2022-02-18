@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>api</groupId>
-    <artifactId>discovery_door</artifactId>
+    <artifactId>hackathon_sei_22</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>discovery_door</name>
+    <name>hackathon_sei_22</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
