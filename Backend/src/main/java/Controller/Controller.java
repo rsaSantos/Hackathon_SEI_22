@@ -114,14 +114,14 @@ public class Controller {
         return map;
     }
 
-    private List<Ementa> encontraEmentas(int n,List<Ementa> ementas){
+    private List<Ementa> encontraEmentas(int n, List<Ementa> ementas){
         List<Ementa> nEmentas = new ArrayList<>();
 
-        if(n > ementas.size())
+        if(n >= ementas.size())
             return ementas;
 
         while(n > 0){
-            int random = (int)  Math.round((Math.random() * n));
+            int random = (int) Math.round((Math.random() * n));
             nEmentas.add(ementas.remove(random));
             n--;
         }
