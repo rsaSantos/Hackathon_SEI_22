@@ -53,7 +53,7 @@ public class EmentaDAO {
         try{
             Connection c = ConnectionPool.getConnection();
             Statement st = ConnectionPool.getStatement(c);
-            ResultSet rs = st.executeQuery("SELECT * FROM Ementa where nomeReceita = '" + nomeReceita + "';");
+            ResultSet rs = st.executeQuery("SELECT * FROM Ementa where Nome = '" + nomeReceita + "';");
 
             rs.next();
             ementa = new Ementa(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita"));
@@ -93,6 +93,7 @@ public class EmentaDAO {
             }
 
             ConnectionPool.close(st, c);
+
             return ingredientes;
         }
         catch (SQLException e) {

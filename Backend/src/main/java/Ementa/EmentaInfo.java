@@ -11,7 +11,7 @@ public class EmentaInfo implements Serializable {
     /// Onde está alojada a fotografia desta receita.
     private String fotografia;
 
-    public EmentaInfo(String fotografia, String nomeEmenta){
+    public EmentaInfo(String nomeEmenta, String fotografia){
         this.fotografia = fotografia;
         this.nomeEmenta = nomeEmenta;
     }
