@@ -1,7 +1,7 @@
 package Controller;
 
 import Database.EmentaDAO;
-import Ementa.Ementa;
+import Ementa.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,27 +25,17 @@ public class Controller {
     }*/ // TODO VER COMO FAZER
 
     /**
-     * Encontra a recieta de uma ementa.
-     *
-     * @return A ementa selecionada.
-     *//*
-    @GetMapping("/receita")
-    public Ementa loadReceita(@RequestParam(value = "nomeEmenta") String nomeEmenta) {
-        return new Ementa(EmentaDAO.getEmenta(nomeEmenta)); //TODO RUBEN
-    }*/
-
-    /**
      * Escolhe n ementas de todas as ementas no sistema.
      *
      * @return Lista de ementas que foram escolhidas.
      */
     @GetMapping("/nEmentas")
-    public List<Ementa> loadNEmentas(@RequestParam(value = "numEmentas") int n) {
+    public PlanoEmentas loadNEmentas(@RequestParam(value = "numEmentas") int n) {
         List<Ementa> todasEmentas = makeEmentas(EmentaDAO.getEmentas());
         List<Ementa> nEmentas = new ArrayList<>();
 
         if(n > todasEmentas.size())
-            return todasEmentas;
+            return new PlanoEmentas(todasEmentas);
 
         while(n > 0){
             int random = (int)(Math.random() * n);
@@ -54,7 +44,7 @@ public class Controller {
             n--;
         }
 
-        return nEmentas;
+        return new PlanoEmentas(nEmentas);
     }
 
     /**
@@ -64,8 +54,8 @@ public class Controller {
      */
 
     @GetMapping("/todasEmentas")
-    public List<Ementa> loadTodasEmentas() {
-        return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
+    public PlanoEmentas loadTodasEmentas() {
+        return new PlanoEmentas(makeEmentas(EmentaDAO.getEmentas())); // TODO FDS
     }
 
     /**
