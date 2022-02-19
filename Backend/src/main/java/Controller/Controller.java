@@ -2,6 +2,7 @@ package Controller;
 
 import Database.EmentaDAO;
 import Ementa.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +78,7 @@ public class Controller {
      * @return Lista de ementas que estão na nossa base de dados.
      */
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/todasEmentas")
     public List<EmentaInfo> loadTodasEmentas() {
         return makeReceitas(EmentaDAO.getEmentas()).stream()
