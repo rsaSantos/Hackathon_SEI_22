@@ -9,9 +9,9 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class ConnectionPool {
     private static HikariDataSource ds = createDS();
-    private static final String url = "jdbc:mysql://discoverydoor.mysql.database.azure.com:3306/discoverydoor";
-    private static final String username = "Grupo19@discoverydoor";
-    private static final String password = "XKQEt68E2XfuSgz";
+    private static final String url = "jdbc:mysql://localhost:3306/mydb";
+    private static final String username = "root";
+    private static final String password = "dockermysql";
 
 
     public static HikariDataSource createDS(){
