@@ -30,9 +30,8 @@ public class Controller {
         List<Ementa> aRemover = new ArrayList<>();
         List<Ementa> ementasPoll = new ArrayList<>();
         for ( Ementa e : EmentaDAO.getEmentas()){
-            boolean a = map.get(e.getEmentaInfo().getNomeEmenta());
             boolean b = map.containsKey(e.getEmentaInfo().getNomeEmenta());
-            if (b && a)
+            if (b && map.get(e.getEmentaInfo().getNomeEmenta()))
                 aRemover.add(e);
             else if(b)
                 planoAtual.add(e);
