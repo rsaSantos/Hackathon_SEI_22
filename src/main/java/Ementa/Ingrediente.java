@@ -2,8 +2,10 @@ package Ementa;
 
 import Controller.Controller;
 
+import java.io.Serializable;
+
 /// Representa um ingrediente presente numa receita.
-public class Ingrediente {
+public class Ingrediente implements Serializable {
 
     /// Nome do ingrediente
     private String nome;

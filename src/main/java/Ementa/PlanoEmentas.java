@@ -1,5 +1,6 @@
 package Ementa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /// Um plano de ementas que pode conter n ementas.
-public class PlanoEmentas {
+public class PlanoEmentas implements Serializable {
 
     /// Todas as ementas no plano
     private List<EmentaInfo> ementasInfo;

@@ -44,10 +44,12 @@ public class Controller {
         List<Ementa> todasEmentas = makeEmentas(EmentaDAO.getEmentas());
         List<Ementa> nEmentas = new ArrayList<>();
 
-        System.out.println(n);
+        if(n > todasEmentas.size())
+            return todasEmentas;
 
         while(n > 0){
-            int random = (int)(Math.random() * (n + 1));
+            int random = (int)(Math.random() * n);
+            System.out.println(random);
             nEmentas.add(todasEmentas.remove(random));
             n--;
         }
@@ -76,12 +78,12 @@ public class Controller {
         List<Ementa> ementas = new ArrayList<>();
         for( String s : ementasInfo ) {
             Ementa e = new Ementa(s);
-            System.out.println(e);
             ementas.add(e);
         }
         return ementas;
         /*
         return ementasInfo.stream()
-                .map(s -> new Ementa(s)).collect(Collectors.toList());*/
+                .map(s -> new Ementa(s)).collect(Collectors.toList());
+        */
     }
 }

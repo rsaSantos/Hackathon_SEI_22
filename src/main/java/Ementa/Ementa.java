@@ -2,12 +2,13 @@ package Ementa;
 
 import Controller.Controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /// A classe Ementa representa uma refeição.
-public class Ementa {
+public class Ementa implements Serializable {
 
     /// Informação básica sobre uma ementa.
     private EmentaInfo ementaInfo;
