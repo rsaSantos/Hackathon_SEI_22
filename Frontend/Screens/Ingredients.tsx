@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
+import API from '../API/api'
 
 const ingredientes = [{
 
@@ -28,7 +29,16 @@ export default function Ingredients() {
     
     const route = useRoute<RouteProp<RootStackParamList,'Ingredients'>>();
     const number = route.params.number
+  
+
+    const request_test = async () => {
+        const dados = await API.get("/todasEmentas");  
+        return dados.data;  
+    };
     
+    request_test().then((dados: any) => {
+        
+    });
 
     const [items, setItems] = useState(ingredientes);
 
