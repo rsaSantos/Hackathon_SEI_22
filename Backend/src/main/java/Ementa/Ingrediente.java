@@ -10,20 +10,15 @@ public class Ingrediente implements Serializable {
     /// Nome do ingrediente
     private String nome;
     /// Quantidade necessária do ingrediente.
-    private String quantidade;
+    private int quantidade;
     /// Sistema numérico em que o ingrediente se encontra.
     private String sistemaNumerico;
 
 
-    public Ingrediente(String ementaInfo){
-        // Database output: name;photo;recipe
-        String[] parsedInfo = ementaInfo.split(Controller.parseChar);
-        if(parsedInfo.length > 2){
-            this.nome = parsedInfo[0];
-            this.quantidade = parsedInfo[1];
-            this.sistemaNumerico = parsedInfo[2];
-        }
-        else throw new IllegalArgumentException();
+    public Ingrediente(String nome,int quantidade,String sistemaNumerico){
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.sistemaNumerico = sistemaNumerico;
     }
 
     /**

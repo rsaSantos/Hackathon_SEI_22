@@ -68,12 +68,9 @@ public class Controller {
         List<Ementa> ementas = new ArrayList<>();
         for( String s : ementasInfo ) {
             Ementa e = new Ementa(s);
+            //e.setListaIngredientes(EmentaDAO.getIngredientesEmenta(e.getEmentaInfo().getNomeEmenta()));
             ementas.add(e);
         }
         return ementas;
-        /*
-        return ementasInfo.stream()
-                .map(s -> new Ementa(s)).collect(Collectors.toList());
-        */
     }
 }

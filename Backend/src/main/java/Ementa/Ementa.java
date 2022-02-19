@@ -43,7 +43,6 @@ public class Ementa implements Serializable {
         this.ementaInfo = e.ementaInfo.clone();
         this.receita = e.receita;
         this.listaIngredientes = e.listaIngredientes.stream().map(Ingrediente::clone).collect(Collectors.toList());
-
     }
 
     /// Método get simples
@@ -53,6 +52,18 @@ public class Ementa implements Serializable {
 
     public EmentaInfo getEmentaInfo() {
         return ementaInfo.clone();
+    }
+
+    public void setEmentaInfo(EmentaInfo ementaInfo) {
+        this.ementaInfo = ementaInfo;
+    }
+
+    public void setReceita(String receita) {
+        this.receita = receita;
+    }
+
+    public void setListaIngredientes(List<Ingrediente> listaIngredientes) {
+        this.listaIngredientes = listaIngredientes;
     }
 
     /// Método clone simples
