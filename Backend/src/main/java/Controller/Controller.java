@@ -47,7 +47,7 @@ public class Controller {
 
         planoAtual.addAll(novaEmentas);
 
-        return new PlanoEmentas(planoAtual);
+        return new PlanoEmentas(makeReceitas(planoAtual));
     }
 
     /**
@@ -69,7 +69,7 @@ public class Controller {
      */
     @GetMapping("/nEmentas")
     public PlanoEmentas loadNEmentas(@RequestParam(value = "numEmentas") int n) {
-        List<Ementa> todasEmentas = makeEmentas(EmentaDAO.getEmentas());
+        List<Ementa> todasEmentas = makeReceitas(EmentaDAO.getEmentas());
         return new PlanoEmentas(encontraEmentas(n,todasEmentas));
     }
 
@@ -80,8 +80,10 @@ public class Controller {
      */
 
     @GetMapping("/todasEmentas")
-    public PlanoEmentas loadTodasEmentas() {
-        return new PlanoEmentas(makeEmentas(EmentaDAO.getEmentas()));
+    public List<EmentaInfo> loadTodasEmentas() {
+        return makeReceitas(EmentaDAO.getEmentas()).stream()
+                .map(s -> s.getEmentaInfo())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -90,7 +92,7 @@ public class Controller {
      * @param ementas Lista com as ementas.
      * @return Lista com as \ref Ementas.
      */
-    private List<Ementa> makeEmentas(List<Ementa> ementas) {
+    private List<Ementa> makeReceitas(List<Ementa> ementas) {
         for( Ementa e : ementas ) {
             e.setListaIngredientes(EmentaDAO.getIngredientesEmenta(e.getEmentaInfo().getNomeEmenta()));
         }
