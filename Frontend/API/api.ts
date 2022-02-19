@@ -14,8 +14,7 @@
 // mudaPlano?nomeEmentasPlano=Empadão+de+seitan;Bacalhau+com+natas;&nomeEmentasAlterar=Bacalhau+com+natas;
 // Devolve novo plano: [nomeEmenta, link foto], [Ingredientes] aka lista de compras
 //
-
-const axios = require('redaxios');
+import axios from 'axios'
 
 const API = axios.create({
     baseURL: "http://localhost:8080/",
@@ -26,14 +25,7 @@ const API = axios.create({
 });
 
 const request_test = async () => {
-    const dados = await module.exports.get("/todasEmentas");
-
-    if (dados.statusCode > 400) {
-        console.log("uma cena");
-    }
-    else{
-        console.log("outra cena, mas melhor!")
-    }
+    const dados = await API.get("/todasEmentas");    
 };
 
 request_test();
