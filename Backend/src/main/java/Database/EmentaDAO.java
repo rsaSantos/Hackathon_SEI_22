@@ -43,7 +43,11 @@ public class EmentaDAO {
         return entries;
     }
 
-
+    /**
+     *
+     * @param nomeReceita
+     * @return
+     */
     public static Ementa getEmentaByName(String nomeReceita){
         Ementa ementa = null;
         try{
@@ -53,6 +57,7 @@ public class EmentaDAO {
 
             rs.next();
             ementa = new Ementa(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita"));
+            ConnectionPool.close(st, c);
         }
         catch (SQLException e) {
             e.printStackTrace();

@@ -7,15 +7,14 @@ import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
 
 
-type IngredientsScreenProp = NativeStackNavigationProp<RootStackParamList,'Ingredients'>;
+
 
 
 export default function Ingredients() {
-    const navigation = useNavigation<IngredientsScreenProp>()
+   
 
     return (
         <View style={Styles.container}>
-            <Pressable onPress={() => navigation.navigate('Recipes')} style={Styles.recepieButton}>recipes</Pressable>
             <FlatList data={ingredientes}
                 renderItem={({ item }) => <Text style={Styles.item}>- {item.ingrediente} (x gr)</Text>} />
                 </View>
@@ -28,20 +27,18 @@ const Styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         position: 'relative',
+        flex: 1,
+        
+        
     },
+    
+
     item: {
         fontSize: 35,
-        left: 30,
-        flex: 1
+        left: 0,
+        
     },
-    recepieButton: {
-        flex:1,
-        fontSize: 50,
-        zIndex:1,
-        left:200,
-        justifyContent: 'flex-end',
-        marginBottom: 36
-      }
+    
 
 })
 
@@ -113,7 +110,7 @@ var ingredientes = [{
     "ingrediente": "ola"
 },
 {
-    "ingrediente": "ola"
+    "ingrediente": "banana"
 },
 
 ]

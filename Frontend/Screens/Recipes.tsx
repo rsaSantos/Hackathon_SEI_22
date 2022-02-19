@@ -1,18 +1,27 @@
 
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
 
+type RequestScreenProp = NativeStackNavigationProp<RootStackParamList,'Recipes'>;
+
+  
 export default function Recepies() {
+    const navigation = useNavigation<RequestScreenProp>()
     return (
-        <View><FlatList data={receitas} renderItem={({ item }) =>
-            <View style={Styles.recipeContainer}><img src={item.imgUrl} />
-                <Text style={Styles.text}>{item.name}</Text></View>} /></View>
+        <View style={Styles.Container}><FlatList data={receitas} renderItem={({ item }) =>
+            <Pressable onPress={() => navigation.navigate('RecipeScreen')} style={Styles.recipeContainer}><img src={item.imgUrl} />
+                <Text style={Styles.text}>{item.name}</Text></Pressable>} /></View>
     )
 }
 
 
 const Styles = StyleSheet.create({
+    Container: {
+        flex: 1,
+    },
     recipeContainer: {
         position: 'relative',
         height: '40',
