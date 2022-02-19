@@ -1,13 +1,16 @@
 package Database;
 
 import Controller.Controller;
+import Ementa.Ingrediente;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class EmentaDAO {
@@ -24,12 +27,6 @@ public class EmentaDAO {
         // List with all the entries
         List<String> entries = new ArrayList<>();
 
-
-
-
-
-
-        
         try {
             Connection c = ConnectionPool.getConnection();
             Statement st = ConnectionPool.getStatement(c);
@@ -55,24 +52,27 @@ public class EmentaDAO {
      * @param ementa
      * @return List of ingredientes from a recipe.
      */
-    public static List<String> getIngredientesEmenta(String ementa){
+    public static List<Ingrediente> getIngredientesEmenta(String ementa){
         // List with all the ingredientes
-        List<String> ingredientes = new ArrayList<>();
+        List<Ingrediente> ingredientes = new ArrayList<>();
+
+
 
         try {
             Connection c = ConnectionPool.getConnection();
             Statement st = ConnectionPool.getStatement(c);
             ResultSet rs = st.executeQuery("SELECT IDIngrediente FROM ReceitaIngrediente where nomeReceita = '" + ementa + "';");
 
-            List<Integer> idIngrediente = new ArrayList<>();
+            // (key=IDIngrediente,value=quantity)
+            Map<Integer, Integer> idIngrediente = new HashMap<>();
             while(rs.next()){
-                idIngrediente.add(rs.getInt("IDIngrediente"));
+                idIngrediente.put(rs.getInt("IDIngrediente"), rs.getInt("Quantidade"));
             }
 
-            for(int id : idIngrediente) {
-                rs = st.executeQuery("SELECT nomeIngrediente FROM Ingredientes where IDIngrediente = '" + id + "';");
+            for (Map.Entry<Integer,Integer> entry : idIngrediente.entrySet()) {
+                rs = st.executeQuery("SELECT nomeIngrediente FROM Ingredientes where IDIngrediente = '" + entry.getKey() + "';");
                 rs.next();
-                ingredientes.add(rs.getString("nomeIngrediente"));
+                ingredientes.add(new Ingrediente(rs.getString("nomeIngrediente"), entry.getValue(), rs.getString("Unidade")));
             }
 
             ConnectionPool.close(st, c);
