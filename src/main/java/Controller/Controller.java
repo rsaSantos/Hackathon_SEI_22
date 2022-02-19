@@ -1,6 +1,8 @@
 package Controller;
 
+import Database.EmentaDAO;
 import Ementa.Ementa;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,19 +19,10 @@ public class Controller {
      *
      * @return Lista de ementas que estão na nossa base de dados.
      */
-    /*
+
     @GetMapping("/todasEmentas")
-    public List<Ementa.Ementa> loadTodasEmentas() {
-        return makeMuseums(EmentaDAO.getMuseums()); // TODO MAGIA BASE DE DADOS
-    }*/
-
-    /**
-     * Desmonta a informação da ‘string’ para formar uma ementa
-     */
-    private Ementa deserializationEmenta(String info){
-        String[] splitInfo = info.split(parseChar);
-
-        return new Ementa(""); // TODO MAGIA BASE DE DADOS
+    public List<Ementa> loadTodasEmentas() {
+        return makeEmentas(EmentaDAO.getEmentas());
     }
 
     /**
@@ -38,9 +31,9 @@ public class Controller {
      * @param ementasInfo Lista com as strings.
      * @return Lista com as \ref Ementas.
      */
-    private List<Ementa> makeMuseums(List<String> ementasInfo) {
+    private List<Ementa> makeEmentas(List<String> ementasInfo) {
         return ementasInfo.stream()
-                .map(this::deserializationEmenta).collect(Collectors.toList());
+                .map(s -> new Ementa(s)).collect(Collectors.toList());
     }
 
 }
