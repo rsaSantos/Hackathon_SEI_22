@@ -56,4 +56,6 @@ public class Ementa {
     public Ementa clone() {
         return new Ementa(this);
     }
+
+    public String toString() { return nomeEmenta + "\n" + fotografia + "\n" + receita + "\n"; }
 }

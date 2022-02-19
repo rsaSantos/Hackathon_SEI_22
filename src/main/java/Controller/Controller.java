@@ -34,8 +34,11 @@ public class Controller {
      */
     private List<Ementa> makeEmentas(List<String> ementasInfo) {
         List<Ementa> ementas = new ArrayList<>();
-        for( String s : ementasInfo )
-            ementas.add(new Ementa(s));
+        for( String s : ementasInfo ) {
+            Ementa e = new Ementa(s);
+            System.out.println(e);
+            ementas.add(new Ementa(e));
+        }
         return ementas;
         /*
         return ementasInfo.stream()
