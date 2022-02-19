@@ -20,25 +20,23 @@ public class Controller {
      * @return A ementa selecionada.
      */
     @GetMapping("/mudaPlano")
-    public PlanoEmentas mudaPlano(@RequestParam(value = "nomeEmentasPlano") String nomeEmentasPlano,
-            @RequestParam(value = "nomeEmentasAlterar") String nomeEmentasAlterar)
+    public PlanoEmentas mudaPlano(@RequestParam(value = "nomeEmentas") String ementas)
     {
-        List<String> listNomeEmentasPlano = List.of(nomeEmentasPlano.split(Controller.parseChar));
-        List<String> listaNomeEmentasAlterar = List.of(nomeEmentasAlterar.split(Controller.parseChar));
+        Map<String,Boolean> map = parsePlano(ementas);
 
         List<Ementa> planoAtual = new ArrayList<>();
         List<Ementa> aRemover = new ArrayList<>();
         List<Ementa> ementasPoll = new ArrayList<>();
         for ( Ementa e : EmentaDAO.getEmentas()){
-            if (listaNomeEmentasAlterar.contains(e.getEmentaInfo().getNomeEmenta()))
+            if (map.get(e.getEmentaInfo().getNomeEmenta()))
                 aRemover.add(e);
-            else if(listNomeEmentasPlano.contains(e.getEmentaInfo().getNomeEmenta()))
+            else if(!map.get((e.getEmentaInfo().getNomeEmenta())))
                 planoAtual.add(e);
             else
                 ementasPoll.add(e);
         }
 
-        int n = listaNomeEmentasAlterar.size();
+        int n = aRemover.size();
 
         List<Ementa> novaEmentas = encontraEmentas(n,ementasPoll);
         int diff = n - novaEmentas.size();
@@ -97,6 +95,17 @@ public class Controller {
             e.setListaIngredientes(EmentaDAO.getIngredientesEmenta(e.getEmentaInfo().getNomeEmenta()));
         }
         return ementas;
+    }
+
+    private Map<String,Boolean> parsePlano(String plano){
+        Map<String,Boolean> map = new HashMap<>();
+
+         for(String ementa : plano.split(Controller.parseChar)){
+             String [] values = ementa.split(",");
+             map.put(values[0],Boolean.parseBoolean(values[1]));
+         }
+
+        return map;
     }
 
     private List<Ementa> encontraEmentas(int n,List<Ementa> ementas){
