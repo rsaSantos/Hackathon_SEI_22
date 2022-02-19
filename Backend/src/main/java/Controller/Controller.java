@@ -24,7 +24,7 @@ public class Controller {
             @RequestParam(value = "nomeEmentasAlterar") String nomeEmentasAlterar)
     {
         List<String> listNomeEmentasPlano = List.of(nomeEmentasPlano.split(Controller.parseChar));
-        List<String> listaNomeEmentasAlterar = List.of(nomeEmentasPlano.split(Controller.parseChar));
+        List<String> listaNomeEmentasAlterar = List.of(nomeEmentasAlterar.split(Controller.parseChar));
 
         List<Ementa> planoAtual = new ArrayList<>();
         List<Ementa> aRemover = new ArrayList<>();
