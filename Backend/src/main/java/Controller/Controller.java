@@ -98,15 +98,14 @@ public class Controller {
     }
 
     private List<Ementa> encontraEmentas(int n,List<Ementa> ementas){
-        List<Ementa> todasEmentas = makeEmentas(EmentaDAO.getEmentas());
         List<Ementa> nEmentas = new ArrayList<>();
 
-        if(n > todasEmentas.size())
-            return todasEmentas;
+        if(n > ementas.size())
+            return ementas;
 
         while(n > 0){
             int random = (int)(Math.random() * n);
-            nEmentas.add(todasEmentas.remove(random));
+            nEmentas.add(ementas.remove(random));
             n--;
         }
 
