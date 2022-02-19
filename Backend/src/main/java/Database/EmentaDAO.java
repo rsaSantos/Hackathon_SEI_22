@@ -24,6 +24,12 @@ public class EmentaDAO {
         // List with all the entries
         List<String> entries = new ArrayList<>();
 
+
+
+
+
+
+        
         try {
             Connection c = ConnectionPool.getConnection();
             Statement st = ConnectionPool.getStatement(c);
