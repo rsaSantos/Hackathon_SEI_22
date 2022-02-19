@@ -20,6 +20,7 @@ public class Controller {
      *
      * @return A ementa selecionada.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/mudaPlano")
     public PlanoEmentas mudaPlano(@RequestParam(value = "nomeEmentas") String ementas)
     {
@@ -54,6 +55,7 @@ public class Controller {
      *
      * @return A ementa selecionada.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/receita")
     public Ementa getReceita(@RequestParam(value = "nomeEmenta") String nomeEmenta) {
         Ementa e = new Ementa(EmentaDAO.getEmentaByName(nomeEmenta));
@@ -66,6 +68,7 @@ public class Controller {
      *
      * @return Lista de ementas que foram escolhidas.
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/nEmentas")
     public PlanoEmentas loadNEmentas(@RequestParam(value = "numEmentas") int n) {
         List<Ementa> todasEmentas = makeReceitas(EmentaDAO.getEmentas());
