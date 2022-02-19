@@ -3,11 +3,11 @@ package Controller;
 import Database.EmentaDAO;
 import Ementa.Ementa;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class Controller {
@@ -15,16 +15,45 @@ public class Controller {
     public static String parseChar = ";";
 
     /**
-     * Oferece informação sobre todas as ementas no sistema.
+     * Encontra a recieta de uma ementa.
      *
-     * @return Lista de ementas que estão na nossa base de dados.
+     * @return A ementa selecionada.
+     *//*
+    @GetMapping("/receita")
+    public Ementa change1Ementa(@RequestParam(value = "nomeEmenta") String nomeEmenta) {
+        return new Ementa(EmentaDAO.getEmenta(nomeEmenta)); //TODO RUBEN
+    }*/ // TODO VER COMO FAZER
+
+    /**
+     * Encontra a recieta de uma ementa.
+     *
+     * @return A ementa selecionada.
+     *//*
+    @GetMapping("/receita")
+    public Ementa loadReceita(@RequestParam(value = "nomeEmenta") String nomeEmenta) {
+        return new Ementa(EmentaDAO.getEmenta(nomeEmenta)); //TODO RUBEN
+    }*/
+
+    /**
+     * Escolhe n ementas de todas as ementas no sistema.
+     *
+     * @return Lista de ementas que foram escolhidas.
      */
+    @GetMapping("/nEmentas")
+    public List<Ementa> loadNEmentas(@RequestParam(value = "numEmentas") int n) {
+        List<Ementa> todasEmentas = makeEmentas(EmentaDAO.getEmentas());
+        List<Ementa> nEmentas = new ArrayList<>();
 
-    @GetMapping("/todasEmentas")
-    public List<Ementa> loadNEmentas() {
-        return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
+        System.out.println(n);
+
+        while(n > 0){
+            int random = (int)(Math.random() * (n + 1));
+            nEmentas.add(todasEmentas.remove(random));
+            n--;
+        }
+
+        return nEmentas;
     }
-
 
     /**
      * Oferece informação sobre todas as ementas no sistema.
@@ -34,6 +63,7 @@ public class Controller {
 
     @GetMapping("/todasEmentas")
     public List<Ementa> loadTodasEmentas() {
+        System.out.println("dfffffffffffffffff");
         return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
     }
 
@@ -55,7 +85,4 @@ public class Controller {
         return ementasInfo.stream()
                 .map(s -> new Ementa(s)).collect(Collectors.toList());*/
     }
-
-
-
 }
