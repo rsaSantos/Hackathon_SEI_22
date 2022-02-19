@@ -9,6 +9,9 @@
         <module name="hackathon_sei_22" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hackathon_sei_22" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
