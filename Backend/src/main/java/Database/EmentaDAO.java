@@ -16,10 +16,6 @@ import java.util.Map;
 
 public class EmentaDAO {
 
-    private static String createEmentaEntry(String name, String link, String recipe){
-        return name + Controller.parseChar + link + Controller.parseChar + recipe;
-    }
-
     /**
      *
      * @return List containing name of ementa, photo link and the step-by-step guide.
@@ -48,7 +44,21 @@ public class EmentaDAO {
     }
 
 
-    //public static List<Ementa>
+    public static Ementa getEmentaByName(String nomeReceita){
+        Ementa ementa = null;
+        try{
+            Connection c = ConnectionPool.getConnection();
+            Statement st = ConnectionPool.getStatement(c);
+            ResultSet rs = st.executeQuery("SELECT * FROM Ementa where nomeReceita = '" + nomeReceita + "';");
+
+            rs.next();
+            ementa = new Ementa(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita"));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ementa;
+    }
 
 
     /**
