@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="RequestScreen" component={RequestScreen} />
-        <Tab.Screen name="Ingredients" component={Ingredients} />
+        <Tab.Screen name="Ingredients" component={Ingredients} initialParams={{number: 0}}/>
         <Tab.Screen name="Recipes" component={Recipes} />
         <Tab.Screen name="RecipeScreen" component={RecipeScreen} />
       </Tab.Navigator>

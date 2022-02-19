@@ -1,25 +1,27 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
+
+import { useRoute } from '@react-navigation/native';
 import { useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { RootStackParamList } from '../stackParams';
+
 
 
 var ingredientes = [{
-    "id": 0,
+
     "ingrediente": "ola",
     "pressed": false
 },
 {
-    "id": 1,
+
     "ingrediente": "t",
     "pressed": false
 }
 ]
 
+
+
 export default function Ingredients() {
+
 
 
     const [items, setItems] = useState(ingredientes);
@@ -46,10 +48,14 @@ export default function Ingredients() {
     return (
         <View style={Styles.container}>
             <FlatList data={items}
-                renderItem={({ item, index }) =>
-                    <Pressable
-                        onPress={() => handleSelectItem(index)}
-                        style={Styles.item}>- {item.ingrediente} (x gr) {showIcon(item.pressed)}</Pressable>} />
+                renderItem={({ item, index }) => 
+                    <View style={Styles.itemContainer}>
+                        <Text style={Styles.item}>- {item.ingrediente} (x gr)</Text>
+                        <Pressable
+                            onPress={() => handleSelectItem(index)}
+                            style={Styles.checkButton}>{showIcon(item.pressed)}</Pressable> 
+                    </View>}/>
+            
         </View>
 
     )
@@ -64,13 +70,19 @@ const Styles = StyleSheet.create({
 
 
     },
-
-
+    checkButton: {
+        position: 'absolute',
+        right: 0,
+    },
     item: {
         fontSize: 35,
         left: 0,
 
     },
+    itemContainer: {
+        position: 'relative',
+        marginBottom: 5,
+    }
 
 
 })
