@@ -43,6 +43,26 @@ public class Ingrediente implements Serializable {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getSistemaNumerico() {
+        return sistemaNumerico;
+    }
+
+    public void setSistemaNumerico(String sistemaNumerico) {
+        this.sistemaNumerico = sistemaNumerico;
+    }
+
     /**
      * Junta dois ingredientes, ou seja, a sua quantidade.
      *
