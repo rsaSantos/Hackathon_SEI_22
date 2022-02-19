@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class PlanoEmentas {
 
     /// Todas as ementas no plano
-    private List<Ementa> ementas;
+    private List<EmentaInfo> ementasInfo;
     /// Todos os ingredientes no plano.
     private List<Ingrediente> todosIngredientes;
 
@@ -20,8 +20,8 @@ public class PlanoEmentas {
      * @param ementas a lista de ementas que formam este plano
      */
     public PlanoEmentas(List<Ementa> ementas){
-        this.ementas = ementas.stream().map(Ementa::clone).collect(Collectors.toList());
-        this.todosIngredientes = encontraTodosIngredientes();
+        this.ementasInfo = ementas.stream().map(Ementa::getEmentaInfo).collect(Collectors.toList());
+        this.todosIngredientes = encontraTodosIngredientes(ementas);
     }
 
     /**
@@ -30,7 +30,7 @@ public class PlanoEmentas {
      *
      * @return lista com ingredientes total.
      */
-    private List<Ingrediente> encontraTodosIngredientes(){
+    private List<Ingrediente> encontraTodosIngredientes(List<Ementa> ementas){
         Map<String,Ingrediente> mapaIngredientes = new HashMap<>();
         for (Ementa e : ementas){
             for(Ingrediente i :e.getListaIngredientes()){

@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/// A classe Ementa.Ementa representa uma refeição.
+/// A classe Ementa representa uma refeição.
 public class Ementa {
 
-    /// O nome desta refeição.
-    private String nomeEmenta;
+    /// Informação básica sobre uma ementa.
+    private EmentaInfo ementaInfo;
     /// Os passos a seguir para fazer esta receita.
     private String receita;
-    /// Onde está alojada a fotografia desta receita.
-    private String fotografia;
     /// A lista de ingredientes necessária para fazer esta ementa.
     private List<Ingrediente> listaIngredientes;
 
@@ -27,8 +25,7 @@ public class Ementa {
         // Database output: name;photo;recipe
         String[] parsedInfo = ementaInfo.split(Controller.parseChar);
         if(parsedInfo.length > 2){
-            this.nomeEmenta = parsedInfo[0];
-            this.fotografia = parsedInfo[1];
+            this.ementaInfo = new EmentaInfo(parsedInfo[0],parsedInfo[1]);
             this.receita = parsedInfo[2];
             this.listaIngredientes = new ArrayList<>();
             // TODO LISTA ING
@@ -42,9 +39,8 @@ public class Ementa {
      * @param e a ementa que se pretende copiar.
      */
     public Ementa(Ementa e){
-        this.nomeEmenta = e.nomeEmenta;
+        this.ementaInfo = e.ementaInfo.clone();
         this.receita = e.receita;
-        this.fotografia = e.fotografia;
         this.listaIngredientes = e.listaIngredientes.stream().map(Ingrediente::clone).collect(Collectors.toList());
 
     }
@@ -54,10 +50,12 @@ public class Ementa {
         return listaIngredientes.stream().map(Ingrediente::clone).collect(Collectors.toList());
     }
 
+    public EmentaInfo getEmentaInfo() {
+        return ementaInfo.clone();
+    }
+
     /// Método clone simples
     public Ementa clone() {
         return new Ementa(this);
     }
-
-    public String toString() { return nomeEmenta + "\n" + fotografia + "\n" + receita + "\n"; }
 }

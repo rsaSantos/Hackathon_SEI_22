@@ -14,6 +14,17 @@ public class Controller {
 
     public static String parseChar = ";";
 
+    /**
+     * Oferece informação sobre todas as ementas no sistema.
+     *
+     * @return Lista de ementas que estão na nossa base de dados.
+     */
+
+    @GetMapping("/todasEmentas")
+    public List<Ementa> loadNEmentas() {
+        return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
+    }
+
 
     /**
      * Oferece informação sobre todas as ementas no sistema.
@@ -23,7 +34,7 @@ public class Controller {
 
     @GetMapping("/todasEmentas")
     public List<Ementa> loadTodasEmentas() {
-        return makeEmentas(EmentaDAO.getEmentas());
+        return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
     }
 
     /**
@@ -37,12 +48,14 @@ public class Controller {
         for( String s : ementasInfo ) {
             Ementa e = new Ementa(s);
             System.out.println(e);
-            ementas.add(new Ementa(e));
+            ementas.add(e);
         }
         return ementas;
         /*
         return ementasInfo.stream()
                 .map(s -> new Ementa(s)).collect(Collectors.toList());*/
     }
+
+
 
 }
