@@ -2,7 +2,7 @@
 
 export type RootStackParamList = {
     RequestScreen: undefined
-    Ingredients: undefined
+    Ingredients: {number : number}
     Recipes: undefined
     RecipeScreen: undefined
     

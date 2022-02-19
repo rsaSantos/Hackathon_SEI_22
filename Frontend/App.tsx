@@ -6,15 +6,17 @@ import Ingredients from './Screens/Ingredients'
 import RequestScreen from './Screens/RequestScreen';
 import Recipes from './Screens/Recipes'
 import RecipeScreen from './Screens/RecipeScreen';
+import EmentaProvider from './contexts/Ementa';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const Tab = createBottomTabNavigator();
 
 
+
 export default function App() {
   return (
-
+    <EmentaProvider>
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="RequestScreen" component={RequestScreen} />
@@ -24,6 +26,7 @@ export default function App() {
       </Tab.Navigator>
 
     </NavigationContainer>
+    </EmentaProvider>
 
   );
 };

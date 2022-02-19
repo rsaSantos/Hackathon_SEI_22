@@ -1,28 +1,34 @@
 
-import { useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { RootStackParamList } from '../stackParams';
 
-
-
-var ingredientes = [{
+const ingredientes = [{
 
     "ingrediente": "ola",
     "pressed": false
-},
-{
-
+  },
+  {
+  
     "ingrediente": "t",
     "pressed": false
-}
-]
+  }
+  ]
+  
+
+
+
 
 
 
 export default function Ingredients() {
-
-
+    
+    const route = useRoute<RouteProp<RootStackParamList,'Ingredients'>>();
+    const number = route.params.number
+    
 
     const [items, setItems] = useState(ingredientes);
 
@@ -54,8 +60,9 @@ export default function Ingredients() {
                         <Pressable
                             onPress={() => handleSelectItem(index)}
                             style={Styles.checkButton}>{showIcon(item.pressed)}</Pressable> 
+                       
                     </View>}/>
-            
+                <Text>{number}</Text>
         </View>
 
     )

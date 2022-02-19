@@ -4,13 +4,7 @@ import { ListItem } from 'react-native-elements';
 import API from '../API/api'
 
 export default function RecipeScreen() {
-    const request_test = async () => {
-        const dados = await API.get("/todasEmentas");  
-        return dados.data;  
-    };
-    request_test().then((dados: any) => {
-        console.log(dados);
-    });
+    
     
     return (
 
