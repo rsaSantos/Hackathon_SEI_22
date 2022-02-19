@@ -11,10 +11,11 @@
 // receita?nomeEmenta=bacalhau+com+natas
 // Devolve ementa e seus ingredientes: nomeEmenta, link foto, [Ingredientes]
 //
-// mudaPlano?nomeEmentasPlano=Empadão+de+seitan;Bacalhau+com+natas;&nomeEmentasAlterar=Bacalhau+com+natas;
+// mudaPlano?nomeEmentasPlano=Empadão+de+seitan,true;Bacalhau+com+natas,false
 // Devolve novo plano: [nomeEmenta, link foto], [Ingredientes] aka lista de compras
 //
 import axios from 'axios'
+import { json } from 'stream/consumers';
 
 const API = axios.create({
     baseURL: "http://localhost:8080/",
@@ -25,21 +26,34 @@ const API = axios.create({
 });
 
 const todasEmentas = async () => {
-    const dados = await API.get("/todasEmentas");    
+    const dados = await API.get("/todasEmentas");
 };
 
 // TODO: ARGUMENTOS
-const nEmentas = async () => {
-    const dados = await API.get("/nEmentas");
+const nEmentas = async (n : number) => {
+    const dados = await API.get("/nEmentas?numEmentas=" + n);
 };
 
-const receita = async () => {
-    const dados = await API.get("/todasEmentas");
+const receita = async (receita_str : string) => {
+    const dados = await API.get("/receita?nomeEmenta=" + receita_str);
 };
 
-const mudaPlano = async () => {
-    const dados = await API.get("/todasEmentas");
+// TODO: Quem cria a string?
+const mudaPlano = async (jsonStr : string) => {
+    // Build string from json: [ {"ingrediente": nome, "pressed": boolean}, {...} ]
+    let jsonObj = JSON.parse(jsonStr)
+    // Create empty string
+    let plano_str : string = "";
+    // Iterate JSON file
+    for (let obj of jsonObj){
+        // Each obj is a {"ingrediente": nome, "pressed": boolean}
+        let nomeEmenta: string = obj.ingrediente
+        let boolPress: boolean = obj.pressed
+        // Increment string
+        plano_str = plano_str + nomeEmenta.replaceAll(" ", "+") + "," + boolPress + ";";
+    }
+    // Get the data
+    const dados = await API.get("/mudaPlano?nomeEmentasPlano=" + plano_str);
 };
-
 
 export default API;
