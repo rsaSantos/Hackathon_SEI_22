@@ -25,11 +25,11 @@ const API = axios.create({
 });
 
 const todasEmentas = async () => {
-    const dados = await API.get("/todasEmentas");    
+    const dados = await API.get("/todasEmentas");
 };
 
 // TODO: ARGUMENTOS
-const nEmentas = async () => {
+const nEmentas = async (n : number) => {
     const dados = await API.get("/nEmentas");
 };
 
