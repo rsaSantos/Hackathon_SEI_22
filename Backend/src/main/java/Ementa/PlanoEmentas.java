@@ -25,6 +25,23 @@ public class PlanoEmentas implements Serializable {
         this.todosIngredientes = encontraTodosIngredientes(ementas);
     }
 
+
+    public List<EmentaInfo> getEmentasInfo() {
+        return ementasInfo;
+    }
+
+    public void setEmentasInfo(List<EmentaInfo> ementasInfo) {
+        this.ementasInfo = ementasInfo;
+    }
+
+    public List<Ingrediente> getTodosIngredientes() {
+        return todosIngredientes;
+    }
+
+    public void setTodosIngredientes(List<Ingrediente> todosIngredientes) {
+        this.todosIngredientes = todosIngredientes;
+    }
+
     /**
      * Usa a lista de ementas para gerar a lista de ingredientes pata cumprir o plano.\n
      * Usa um mapa auxiliar para calcular a lista de ingredientes.

@@ -35,6 +35,17 @@ public class Ementa implements Serializable {
     }
 
     /**
+     * Construtor que permite gerar uma ementa.
+     *
+     * @param ementaInfo a informação de uma ementa formatada numa ‘string’
+     */
+    public Ementa(String nome,String fotografia,String receita) {
+        this.ementaInfo = new EmentaInfo(nome, fotografia);
+        this.receita = receita;
+        this.listaIngredientes = new ArrayList<>();
+    }
+
+    /**
      * Construtor que gera uma nova ementa a partir de uma já gerada.
      *
      * @param e a ementa que se pretende copiar.
@@ -43,7 +54,6 @@ public class Ementa implements Serializable {
         this.ementaInfo = e.ementaInfo.clone();
         this.receita = e.receita;
         this.listaIngredientes = e.listaIngredientes.stream().map(Ingrediente::clone).collect(Collectors.toList());
-
     }
 
     /// Método get simples
@@ -53,6 +63,18 @@ public class Ementa implements Serializable {
 
     public EmentaInfo getEmentaInfo() {
         return ementaInfo.clone();
+    }
+
+    public void setEmentaInfo(EmentaInfo ementaInfo) {
+        this.ementaInfo = ementaInfo;
+    }
+
+    public void setReceita(String receita) {
+        this.receita = receita;
+    }
+
+    public void setListaIngredientes(List<Ingrediente> listaIngredientes) {
+        this.listaIngredientes = listaIngredientes;
     }
 
     /// Método clone simples

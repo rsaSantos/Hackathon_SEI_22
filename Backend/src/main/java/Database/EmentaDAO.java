@@ -1,28 +1,28 @@
 package Database;
 
 import Controller.Controller;
+import Ementa.Ementa;
+import Ementa.Ingrediente;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class EmentaDAO {
-
-    private static String createEmentaEntry(String name, String link, String recipe){
-        return name + Controller.parseChar + link + Controller.parseChar + recipe;
-    }
 
     /**
      *
      * @return List containing name of ementa, photo link and the step-by-step guide.
      */
-    public static List<String> getEmentas(){
+    public static List<Ementa> getEmentas(){
         // List with all the entries
-        List<String> entries = new ArrayList<>();
+        List<Ementa> entries = new ArrayList<>();
 
         try {
             Connection c = ConnectionPool.getConnection();
@@ -30,8 +30,7 @@ public class EmentaDAO {
             ResultSet rs = st.executeQuery("SELECT * FROM Ementa;");
 
             while(rs.next()){
-                String ementaEntry = createEmentaEntry(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita"));
-                entries.add(ementaEntry);
+                entries.add(new Ementa(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita")));
             }
 
             ConnectionPool.close(st, c);
@@ -44,29 +43,48 @@ public class EmentaDAO {
         return entries;
     }
 
+
+    public static Ementa getEmentaByName(String nomeReceita){
+        Ementa ementa = null;
+        try{
+            Connection c = ConnectionPool.getConnection();
+            Statement st = ConnectionPool.getStatement(c);
+            ResultSet rs = st.executeQuery("SELECT * FROM Ementa where nomeReceita = '" + nomeReceita + "';");
+
+            rs.next();
+            ementa = new Ementa(rs.getString("Nome"), rs.getString("Fotografia"), rs.getString("Receita"));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ementa;
+    }
+
+
     /**
      *
      * @param ementa
      * @return List of ingredientes from a recipe.
      */
-    public static List<String> getIngredientesEmenta(String ementa){
+    public static List<Ingrediente> getIngredientesEmenta(String ementa){
         // List with all the ingredientes
-        List<String> ingredientes = new ArrayList<>();
+        List<Ingrediente> ingredientes = new ArrayList<>();
 
         try {
             Connection c = ConnectionPool.getConnection();
             Statement st = ConnectionPool.getStatement(c);
-            ResultSet rs = st.executeQuery("SELECT IDIngrediente FROM ReceitaIngrediente where nomeReceita = '" + ementa + "';");
+            ResultSet rs = st.executeQuery("SELECT * FROM ReceitaIngrediente where nomeReceita = '" + ementa + "';");
 
-            List<Integer> idIngrediente = new ArrayList<>();
+            // (key=IDIngrediente,value=quantity)
+            Map<Integer, Integer> idIngrediente = new HashMap<>();
             while(rs.next()){
-                idIngrediente.add(rs.getInt("IDIngrediente"));
+                idIngrediente.put(rs.getInt("IDIngrediente"), rs.getInt("Quantidade"));
             }
 
-            for(int id : idIngrediente) {
-                rs = st.executeQuery("SELECT nomeIngrediente FROM Ingredientes where IDIngrediente = '" + id + "';");
+            for (Map.Entry<Integer,Integer> entry : idIngrediente.entrySet()) {
+                rs = st.executeQuery("SELECT * FROM Ingredientes where IDIngrediente = '" + entry.getKey() + "';");
                 rs.next();
-                ingredientes.add(rs.getString("nomeIngrediente"));
+                ingredientes.add(new Ingrediente(rs.getString("nomeIngrediente"), entry.getValue(), rs.getString("Unidade")));
             }
 
             ConnectionPool.close(st, c);
@@ -82,9 +100,11 @@ public class EmentaDAO {
 
     // TODO: DELETE
     public static void main(String[] args) {
-        List<String> ing = getIngredientesEmenta("Bacalhau com Natas");
+        /*List<String> ing = getIngredientesEmenta("Bacalhau com Natas");
         for(String ementa : ing)
             System.out.println(ementa);
+         */
+
     }
 
 

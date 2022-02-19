@@ -5,12 +5,13 @@ import java.io.Serializable;
 /// Informação basica sobre uma ementa.
 public class EmentaInfo implements Serializable {
 
-    /// Onde está alojada a fotografia desta receita.
-    private String fotografia;
     /// O nome desta refeição.
     private String nomeEmenta;
 
-    public EmentaInfo(String fotografia,String nomeEmenta){
+    /// Onde está alojada a fotografia desta receita.
+    private String fotografia;
+
+    public EmentaInfo(String fotografia, String nomeEmenta){
         this.fotografia = fotografia;
         this.nomeEmenta = nomeEmenta;
     }
@@ -32,6 +33,6 @@ public class EmentaInfo implements Serializable {
     }
 
     public EmentaInfo clone() {
-        return new EmentaInfo(fotografia,nomeEmenta);
+        return new EmentaInfo(nomeEmenta, fotografia);
     }
 }

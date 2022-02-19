@@ -39,7 +39,6 @@ public class Controller {
 
         while(n > 0){
             int random = (int)(Math.random() * n);
-            System.out.println(random);
             nEmentas.add(todasEmentas.remove(random));
             n--;
         }
@@ -55,25 +54,21 @@ public class Controller {
 
     @GetMapping("/todasEmentas")
     public PlanoEmentas loadTodasEmentas() {
-        return new PlanoEmentas(makeEmentas(EmentaDAO.getEmentas())); // TODO FDS
+        return new PlanoEmentas(makeEmentas(EmentaDAO.getEmentas()));
     }
 
     /**
      * Transforma uma lista de ‘strings’ numa lista de ementas
      *
-     * @param ementasInfo Lista com as strings.
+     * @param ementas Lista com as ementas.
      * @return Lista com as \ref Ementas.
      */
-    private List<Ementa> makeEmentas(List<String> ementasInfo) {
-        List<Ementa> ementas = new ArrayList<>();
-        for( String s : ementasInfo ) {
-            Ementa e = new Ementa(s);
-            ementas.add(e);
+    private List<Ementa> makeEmentas(List<Ementa> ementas) {
+        for( Ementa e : ementas ) {
+            e.setListaIngredientes(EmentaDAO.getIngredientesEmenta(e.getEmentaInfo().getNomeEmenta()));
         }
         return ementas;
-        /*
-        return ementasInfo.stream()
-                .map(s -> new Ementa(s)).collect(Collectors.toList());
-        */
     }
+
+
 }
