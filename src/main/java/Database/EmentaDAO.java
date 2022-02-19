@@ -44,12 +44,46 @@ public class EmentaDAO {
         return entries;
     }
 
+    /**
+     *
+     * @param ementa
+     * @return List of ingredientes from a recipe.
+     */
+    public static List<String> getIngredientesEmenta(String ementa){
+        // List with all the ingredientes
+        List<String> ingredientes = new ArrayList<>();
+
+        try {
+            Connection c = ConnectionPool.getConnection();
+            Statement st = ConnectionPool.getStatement(c);
+            ResultSet rs = st.executeQuery("SELECT IDIngrediente FROM ReceitaIngrediente where nomeReceita = '" + ementa + "';");
+
+            List<Integer> idIngrediente = new ArrayList<>();
+            while(rs.next()){
+                idIngrediente.add(rs.getInt("IDIngrediente"));
+            }
+
+            for(int id : idIngrediente) {
+                rs = st.executeQuery("SELECT nomeIngrediente FROM Ingredientes where IDIngrediente = '" + id + "';");
+                rs.next();
+                ingredientes.add(rs.getString("nomeIngrediente"));
+            }
+
+            ConnectionPool.close(st, c);
+            return ingredientes;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ingredientes;
+    }
 
 
     // TODO: DELETE
     public static void main(String[] args) {
-        List<String> entries = getEmentas();
-        for(String ementa : entries)
+        List<String> ing = getIngredientesEmenta("Bacalhau com Natas");
+        for(String ementa : ing)
             System.out.println(ementa);
     }
 

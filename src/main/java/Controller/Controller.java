@@ -63,7 +63,6 @@ public class Controller {
 
     @GetMapping("/todasEmentas")
     public List<Ementa> loadTodasEmentas() {
-        System.out.println("dfffffffffffffffff");
         return makeEmentas(EmentaDAO.getEmentas()); // TODO FDS
     }
 
