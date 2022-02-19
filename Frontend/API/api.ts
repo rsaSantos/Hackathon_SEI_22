@@ -30,15 +30,16 @@ const todasEmentas = async () => {
 
 // TODO: ARGUMENTOS
 const nEmentas = async (n : number) => {
-    const dados = await API.get("/nEmentas");
+    const dados = await API.get("/nEmentas?numEmentas=" + n);
 };
 
-const receita = async () => {
-    const dados = await API.get("/todasEmentas");
+const receita = async (receita_str : string) => {
+    const dados = await API.get("/receita?nomeEmenta=" + receita_str);
 };
 
-const mudaPlano = async () => {
-    const dados = await API.get("/todasEmentas");
+// TODO: Quem cria a string?
+const mudaPlano = async (plano_str : string) => {
+    const dados = await API.get("/mudaPlano?nomeEmentasPlano=" + plano_str);
 };
 
 
