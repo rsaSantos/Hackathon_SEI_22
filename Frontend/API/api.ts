@@ -24,10 +24,22 @@ const API = axios.create({
     }
 });
 
-const request_test = async () => {
+const todasEmentas = async () => {
     const dados = await API.get("/todasEmentas");    
 };
 
-request_test();
+// TODO: ARGUMENTOS
+const nEmentas = async () => {
+    const dados = await API.get("/nEmentas");
+};
+
+const receita = async () => {
+    const dados = await API.get("/todasEmentas");
+};
+
+const mudaPlano = async () => {
+    const dados = await API.get("/todasEmentas");
+};
+
 
 export default API;
