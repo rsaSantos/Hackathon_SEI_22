@@ -15,8 +15,7 @@
 // Devolve novo plano: [nomeEmenta, link foto], [Ingredientes] aka lista de compras
 //
 
-import axios from 'redaxios';
-
+const axios = require('redaxios');
 
 const API = axios.create({
     baseURL: "http://localhost:8080/",
@@ -26,8 +25,17 @@ const API = axios.create({
     }
 });
 
-export default API;
+const request_test = async () => {
+    const dados = await module.exports.get("/todasEmentas");
 
-// João - frontend
-// const dados = await API.get("/nEmentas")
-//if dados.statusCode > 400 
+    if (dados.statusCode > 400) {
+        console.log("uma cena");
+    }
+    else{
+        console.log("outra cena, mas melhor!")
+    }
+};
+
+request_test();
+
+export default API;
