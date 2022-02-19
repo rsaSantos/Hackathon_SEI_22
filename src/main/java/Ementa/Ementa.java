@@ -2,6 +2,7 @@ package Ementa;
 
 import Controller.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,9 @@ public class Ementa {
         String[] parsedInfo = ementaInfo.split(Controller.parseChar);
         if(parsedInfo.length > 2){
             this.nomeEmenta = parsedInfo[0];
-            this.receita = parsedInfo[1];
-            this.fotografia = parsedInfo[2];
+            this.fotografia = parsedInfo[1];
+            this.receita = parsedInfo[2];
+            this.listaIngredientes = new ArrayList<>();
             // TODO LISTA ING
         }
         else throw new IllegalArgumentException();
