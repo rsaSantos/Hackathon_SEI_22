@@ -5,6 +5,7 @@ import Ementa.Ementa;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +33,13 @@ public class Controller {
      * @return Lista com as \ref Ementas.
      */
     private List<Ementa> makeEmentas(List<String> ementasInfo) {
+        List<Ementa> ementas = new ArrayList<>();
+        for( String s : ementasInfo )
+            ementas.add(new Ementa(s));
+        return ementas;
+        /*
         return ementasInfo.stream()
-                .map(s -> new Ementa(s)).collect(Collectors.toList());
+                .map(s -> new Ementa(s)).collect(Collectors.toList());*/
     }
 
 }
