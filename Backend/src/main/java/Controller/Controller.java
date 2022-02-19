@@ -106,13 +106,12 @@ public class Controller {
             return ementas;
 
         while(n > 0){
-            int random = (int)(Math.random() * n);
+            int random = (int)  Math.round((Math.random() * n));
             nEmentas.add(ementas.remove(random));
             n--;
         }
 
         return nEmentas;
     }
-
 
 }
