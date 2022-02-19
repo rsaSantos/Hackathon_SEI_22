@@ -4,14 +4,16 @@ import { ListItem } from 'react-native-elements';
 
 export default function RecipeScreen() {
     return (
-        <View><Text style={styles.title}>{recipe.nome}</Text>
-        <img src={recipe.imgUrl}/>
-        <Text style={styles.subtitle}>Ingredientes</Text>
-        <FlatList data={recipe.ingredients} renderItem={({item}) => <Text style={styles.item}>-{item}</Text>}></FlatList>
-        <br></br>
-        <Text style={styles.subtitle}>Modo de Preparação</Text>
-        <br></br>
-        <Text style={styles.description}>{recipe.descricao}</Text>
+
+        <View >
+            <Text style={styles.title}>{recipe.nome}</Text>
+            <img src={recipe.imgUrl} />
+            <Text style={styles.subtitle}>Ingredientes</Text>
+            <FlatList data={recipe.ingredients} renderItem={({ item }) => <Text style={styles.item}>-{item}</Text>}></FlatList>
+            <br></br>
+            <Text style={styles.subtitle}>Modo de Preparação</Text>
+            <br></br>
+            <Text style={styles.description}>{recipe.descricao}</Text>
 
 
         </View>
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 20,
         fontWeight: 'normal'
-        
+
     }
 })
 
