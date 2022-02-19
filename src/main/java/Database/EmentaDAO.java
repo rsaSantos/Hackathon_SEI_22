@@ -45,6 +45,7 @@ public class EmentaDAO {
     }
 
 
+
     // TODO: DELETE
     public static void main(String[] args) {
         List<String> entries = getEmentas();

@@ -17,7 +17,8 @@ public class Controller {
      * Oferece informação sobre todas as ementas no sistema.
      *
      * @return Lista de ementas que estão na nossa base de dados.
-     *//*
+     */
+    /*
     @GetMapping("/todasEmentas")
     public List<Ementa> loadTodasEmentas() {
         return makeMuseums(EmentaDAO.getMuseums()); // TODO MAGIA BASE DE DADOS
