@@ -3,13 +3,16 @@
 // Ingrediente = {"nome":"Cebola","quantidade":1,"sistemaNumerico":"un"}
 //
 // nEmentas?numEmentas=6
-// Escolhe n ementas do sistema (devolve [nomeEmenta, link foto], [Ingredientes] aka lista de compras): 
+// Escolhe n ementas do sistema (devolve [nomeEmenta, link foto], [Ingredientes] aka lista de compras) 
 //
 // todasEmentas
 // Devolve todas as ementas: [nomeEmenta, link foto]
 //
 // receita?nomeEmenta=bacalhau+com+natas
 // Devolve ementa e seus ingredientes: nomeEmenta, link foto, [Ingredientes]
+//
+// mudaPlano?nomeEmentasPlano=Empadão+de+seitan;Bacalhau+com+natas;&nomeEmentasAlterar=Bacalhau+com+natas;
+// Devolve novo plano: [nomeEmenta, link foto], [Ingredientes] aka lista de compras
 //
 
 import axios from 'redaxios';
