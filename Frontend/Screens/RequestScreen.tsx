@@ -33,6 +33,7 @@ export default function RequestScreen () {
         <Pressable onPress={addcount}><Icon name="pluscircleo" size={80} color="black" type= "antdesign" /></Pressable>
       </View>
       <Pressable onPress={() => navigation.navigate('Ingredients')} style={styles.calculateContainer}>Calculate</Pressable>
+      <Pressable style={styles.allContainer}>All</Pressable>
       
       <StatusBar style="auto" />
     </View>
@@ -77,6 +78,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
     paddingVertical: 12,
     paddingHorizontal: 4,
+    borderRadius: 10,
+    borderWidth: 3,
+    borderColor: 'black',
+    elevation: 3,
+    justifyContent: 'space-between'
+  },
+  allContainer: {
+    position: 'absolute',
+    top: 600,
+    fontSize: 30,
+    paddingVertical: 12,
+    paddingHorizontal: 50,
     borderRadius: 10,
     borderWidth: 3,
     borderColor: 'black',
