@@ -1,11 +1,10 @@
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+package Controller;
+
+import Ementa.Ementa;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @RestController
 public class Controller {
@@ -20,7 +19,7 @@ public class Controller {
      */
     /*
     @GetMapping("/todasEmentas")
-    public List<Ementa> loadTodasEmentas() {
+    public List<Ementa.Ementa> loadTodasEmentas() {
         return makeMuseums(EmentaDAO.getMuseums()); // TODO MAGIA BASE DE DADOS
     }*/
 

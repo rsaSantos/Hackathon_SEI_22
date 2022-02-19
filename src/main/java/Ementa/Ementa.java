@@ -1,7 +1,11 @@
+package Ementa;
+
+import Controller.Controller;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-/// A classe Ementa representa uma refeição.
+/// A classe Ementa.Ementa representa uma refeição.
 public class Ementa {
 
     /// O nome desta refeição.

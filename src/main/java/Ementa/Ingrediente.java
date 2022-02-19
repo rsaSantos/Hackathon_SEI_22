@@ -1,4 +1,6 @@
-import java.util.Objects;
+package Ementa;
+
+import Controller.Controller;
 
 /// Representa um ingrediente presente numa receita.
 public class Ingrediente {
@@ -23,7 +25,7 @@ public class Ingrediente {
     }
 
     /**
-     * Construtor que gera um novo Ingrediente a partir de um já existente.
+     * Construtor que gera um novo Ementa.Ingrediente a partir de um já existente.
      *
      * @param i o ingrediente que se pretende copiar.
      */

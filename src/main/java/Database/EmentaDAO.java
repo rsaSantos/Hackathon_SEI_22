@@ -1,5 +1,7 @@
 package Database;
 
+import Controller.Controller;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +12,8 @@ import java.util.List;
 
 public class EmentaDAO {
 
-
-
     private static String createEmentaEntry(String name, String link, String recipe){
-        return name + ";" + link + ";" + recipe;
+        return name + Controller.parseChar + link + Controller.parseChar + recipe;
     }
 
     /**
