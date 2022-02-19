@@ -86,13 +86,5 @@ public class EmentaDAO {
     }
 
 
-    // TODO: DELETE
-    public static void main(String[] args) {
-        List<String> ing = getIngredientesEmenta("Bacalhau com Natas");
-        for(String ementa : ing)
-            System.out.println(ementa);
-    }
-
-
 
 }

@@ -35,6 +35,17 @@ public class Ementa implements Serializable {
     }
 
     /**
+     * Construtor que permite gerar uma ementa.
+     *
+     * @param ementaInfo a informação de uma ementa formatada numa ‘string’
+     */
+    public Ementa(String nome,String fotografia,String receita) {
+        this.ementaInfo = new EmentaInfo(nome, fotografia);
+        this.receita = receita;
+        this.listaIngredientes = new ArrayList<>();
+    }
+
+    /**
      * Construtor que gera uma nova ementa a partir de uma já gerada.
      *
      * @param e a ementa que se pretende copiar.
