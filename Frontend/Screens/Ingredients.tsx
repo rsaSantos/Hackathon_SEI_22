@@ -1,130 +1,22 @@
 
 import { useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-
-
-
-var ingredientes = [{
-
-    "ingrediente": "Azeite (150 ml)",
-    "pressed": false
-},
-{
-
-    "ingrediente": "Cebola (4 un)",
-    "pressed": false
-},
-{
-    "ingrediente": "Alho (3 un)",
-    "pressed": false
-},
-{
-    "ingrediente": "Polpa de Tomate (40 g)",
-    "pressed": false
-},
-{
-    "ingrediente": "Água (1000 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Salsicha (5 un)",
-    "pressed": false
-},
-{
-    "ingrediente": "Sal",
-    "pressed": false
-},
-{
-    "ingrediente": "Ovo (10 un)",
-    "pressed": false
-},
-{
-    "ingrediente": "Leite (500 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Queijo Ralado (150 g)",
-    "pressed": false
-},
-{
-    "ingrediente": "Carne Picada (400 g)",
-    "pressed": false
-},
-{
-    "ingrediente": "Óleo (500 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Massa (500 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Arroz (500 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Bacalhau (400 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Farinha (300 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Batata (200 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Natas (200 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Seitan (150 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Cogumelos (200 ml)",
-    "pressed": false
-},
-{
-    "ingrediente": "Alho-Francês (4 dentes)",
-    "pressed": false
-}, 
-{
-    "ingrediente": "Batata Doce (200 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Chouriço Vegetal (300 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Cogumelos protobello (10 un)",
-    "pressed": false
-},
-{
-    "ingrediente": "Tomate (3 un)",
-    "pressed" : false
-},
-{
-    "ingrediente": "Folhas de espinafre (10 gr)",
-    "pressed": false
-},
-{
-    "ingrediente": "Folha de louro (3 un)",
-    "pressed": false
-}
-]
-
+import API from '../API/api';
+import { useCount } from '../contexts/Count';
 
 
 export default function Ingredients() {
+    const [items, setItems] = useState([]);
+    const {count} = useCount();
 
-
-
-    const [items, setItems] = useState(ingredientes);
+    useEffect(() => {
+        API.get(`/nEmentas?numEmentas=${count}`).then((response) => {
+            const ingredientes = response.data.todosIngredientes.map((igr) => ({...igr, pressed: false}))
+            setItems(ingredientes);
+        })
+    },[count])
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -150,7 +42,7 @@ export default function Ingredients() {
             <FlatList data={items}
                 renderItem={({ item, index }) => 
                     <View style={Styles.itemContainer}>
-                        <Text style={Styles.item}>- {item.ingrediente} </Text>
+                        <Text style={Styles.item}>- {item.nome} ({item.quantidade} {item.sistemaNumerico}) </Text>
                         <Pressable
                             onPress={() => handleSelectItem(index)}
                             style={Styles.checkButton}>{showIcon(item.pressed)}</Pressable> 
