@@ -15,26 +15,25 @@
 // Devolve novo plano: [nomeEmenta, link foto], [Ingredientes] aka lista de compras
 //
 import axios from 'axios'
-import { json } from 'stream/consumers';
 
 const API = axios.create({
-    baseURL: "http://localhost:8080/",
+    baseURL: "http://172.16.42.4:8080",
     responseType: 'json',
     headers: {
         'Content-Type': 'application/json'
     }
 });
 
-const todasEmentas = async () => {
+export const todasEmentas = async () => {
     const dados = await API.get("/todasEmentas");
 };
 
 // TODO: ARGUMENTOS
-const nEmentas = async (n : number) => {
+export const nEmentas = async (n : number) => {
     const dados = await API.get("/nEmentas?numEmentas=" + n);
 };
 
-const receita = async (receita_str : string) => {
+export const receita = async (receita_str : string) => {
     const dados = await API.get("/receita?nomeEmenta=" + receita_str);
 };
 
