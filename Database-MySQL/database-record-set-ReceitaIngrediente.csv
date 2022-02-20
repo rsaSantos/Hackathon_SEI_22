@@ -22,3 +22,31 @@ nomeReceita,IDIngrediente,Quantidade
 "Empadão de seitan",21,300
 "Empadão de seitan",0,30
 "Empadão de seitan",4,400
+
+0,Azeite,ml
+1,Cebola,un
+2,Alho,un
+3,"Polpa de Tomate",gr
+4,Água,ml
+5,Salsicha,un
+6,Sal,gr
+7,Ovo,un
+8,Leite,ml
+9,"Queijo Ralado",gr
+10,"Carne Picada",gr
+11,Õleo,ml
+12,Massa,gr
+13,Arroz,gr
+14,Bacalhau,gr
+15,Farinha,gr
+16,Batata,gr
+17,Natas,ml
+18,Seitan,gr
+19,Cogumelos,gr
+20,Alho-Francês,un
+21,"Batata Doce",gr
+22,"Chouriço vegetal",gr
+23,"Cogumelos portobello",un
+24,"Tomate",un
+25,"Folhas de espinafres",gr
+26,"Folha de louro",un

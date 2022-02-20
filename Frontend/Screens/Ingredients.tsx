@@ -1,53 +1,130 @@
 
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
+import { useRoute } from '@react-navigation/native';
+import { useState } from 'react';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { RootStackParamList } from '../stackParams';
-import API from '../API/api'
-import { useEmenta } from '../contexts/Ementa';
 
 
 
-let aux = []
+var ingredientes = [{
+
+    "ingrediente": "Azeite (150 ml)",
+    "pressed": false
+},
+{
+
+    "ingrediente": "Cebola (4 un)",
+    "pressed": false
+},
+{
+    "ingrediente": "Alho (3 un)",
+    "pressed": false
+},
+{
+    "ingrediente": "Polpa de Tomate (40 g)",
+    "pressed": false
+},
+{
+    "ingrediente": "Água (1000 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Salsicha (5 un)",
+    "pressed": false
+},
+{
+    "ingrediente": "Sal",
+    "pressed": false
+},
+{
+    "ingrediente": "Ovo (10 un)",
+    "pressed": false
+},
+{
+    "ingrediente": "Leite (500 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Queijo Ralado (150 g)",
+    "pressed": false
+},
+{
+    "ingrediente": "Carne Picada (400 g)",
+    "pressed": false
+},
+{
+    "ingrediente": "Óleo (500 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Massa (500 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Arroz (500 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Bacalhau (400 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Farinha (300 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Batata (200 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Natas (200 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Seitan (150 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Cogumelos (200 ml)",
+    "pressed": false
+},
+{
+    "ingrediente": "Alho-Francês (4 dentes)",
+    "pressed": false
+}, 
+{
+    "ingrediente": "Batata Doce (200 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Chouriço Vegetal (300 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Cogumelos protobello (10 un)",
+    "pressed": false
+},
+{
+    "ingrediente": "Tomate (3 un)",
+    "pressed" : false
+},
+{
+    "ingrediente": "Folhas de espinafre (10 gr)",
+    "pressed": false
+},
+{
+    "ingrediente": "Folha de louro (3 un)",
+    "pressed": false
+}
+]
+
 
 
 export default function Ingredients() {
-    const { ementa, setEmenta } = useEmenta();
 
-    function joinIngrediente(ing) {
-        return { "ingrediente": ing.nome + " " + ing.quantidade + " " + ing.sistemaNumerico, "pressed": false }
-    }
 
-    
-    
-    
-  
-    useEffect(() => {
-    const request_test = async () => {
-        const route = useRoute<RouteProp<RootStackParamList, 'Ingredients'>>();
-        const dados = await API.get("/nEmentas?numEmentas=" + route.params.number);  
-        return dados.data;  
-    };
-    const [items, setItems] = useState([]);
-    //let dadosingredientes = []
-        await request_test().then(async(dados: any) => {
-            
-            
-        for(var i= 0; i < dados.todosIngredientes.length; i++) {
-            aux.push({ "ingrediente": dados.todosIngredientes[i].nome + " " + dados.todosIngredientes[i].quantidade + " " + dados.todosIngredientes[i].sistemaNumerico, "pressed": false })
-        }
-        setEmenta(dados.ementasInfo)
-        
-        setItems(aux)
-    });
-})
-    
 
-    
-
-   
+    const [items, setItems] = useState(ingredientes);
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -60,7 +137,6 @@ export default function Ingredients() {
         })
 
 
-
     function showIcon(pressed: boolean) {
         if (pressed) {
             return <Icon name="checkcircle" size={40} color="black" type="antdesign" />
@@ -68,20 +144,18 @@ export default function Ingredients() {
         else return <Icon name="checkcircleo" size={40} color="black" type="antdesign" />
     }
 
-    
+
     return (
-        
         <View style={Styles.container}>
             <FlatList data={items}
                 renderItem={({ item, index }) => 
                     <View style={Styles.itemContainer}>
-                        <Text style={Styles.item}>- {item.ingrediente} (x gr)</Text>
+                        <Text style={Styles.item}>- {item.ingrediente} </Text>
                         <Pressable
                             onPress={() => handleSelectItem(index)}
                             style={Styles.checkButton}>{showIcon(item.pressed)}</Pressable> 
-                       
                     </View>}/>
-               
+            
         </View>
 
     )
@@ -101,7 +175,7 @@ const Styles = StyleSheet.create({
         right: 0,
     },
     item: {
-        fontSize: 25,
+        fontSize: 30,
         left: 0,
 
     },

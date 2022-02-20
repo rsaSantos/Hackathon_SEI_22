@@ -1,24 +1,20 @@
 import { NavigationContainer, StackNavigationState, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { useState} from 'react';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
-import {useEmenta} from '../contexts/Ementa';
 
 
 
+type RequestScreenProp = NativeStackNavigationProp<RootStackParamList,'RequestScreen'>;
 
-type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'RequestScreen'>;
 
-
-export default function RequestScreen() {
+export default function RequestScreen () {
   const navigation = useNavigation<RequestScreenProp>()
   
-
   const [count, setCount] = useState(1)
-  
   function subtractcount() {
     if (count > 1) {
       setCount(count - 1)
@@ -27,24 +23,21 @@ export default function RequestScreen() {
   function addcount() {
     setCount(count + 1)
   }
-  
   return (
-   
+    
     <View style={styles.container} >
-      <Text style={styles.title}>App Name</Text>
+      <Text style={styles.title}><Icon name="timer-sand" size={80} color="black" type= "material-community" /></Text>
       <View style={styles.countContainer}>
-        <Pressable onPress={subtractcount}><Icon name="minuscircleo" size={80} color="black" type="antdesign" /></Pressable>
+        <Pressable onPress={subtractcount}><Icon name="minuscircleo" size={80} color="black" type= "antdesign" /></Pressable>
         <Text style={styles.text}>{count}</Text>
-        <Pressable onPress={addcount}><Icon name="pluscircleo" size={80} color="black" type="antdesign" /></Pressable>
+        <Pressable onPress={addcount}><Icon name="pluscircleo" size={80} color="black" type= "antdesign" /></Pressable>
       </View>
-      <Pressable onPress={() => {
-        navigation.navigate('Ingredients',{number: count})}} style={styles.calculateContainer}>Calculate</Pressable>
-      <Pressable style={styles.allContainer}>All</Pressable>
-
-      <StatusBar style="auto" />
+      <Pressable onPress={() => navigation.navigate('Lista_de_Compras')} style={styles.calculateContainer}>Gerar Lista de Compras</Pressable>
+      <Pressable onPress={() => navigation.navigate('Receitas')} style={styles.allContainer}>Ver todas as Receitas</Pressable>
       
+      <StatusBar style="auto" />
     </View>
-
+    
   );
 }
 
@@ -64,10 +57,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     elevation: 3,
     textAlign: 'center',
-    width: 70,
+    width:70,
     marginLeft: 50,
     marginRight: 50
-
+    
 
   },
   countContainer: {
@@ -76,8 +69,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     position: 'absolute',
     top: 250,
-
-
+   
+    
   },
   calculateContainer: {
     position: 'absolute',
@@ -110,6 +103,6 @@ const styles = StyleSheet.create({
     top: 100
 
   },
-
-
+  
+  
 });
