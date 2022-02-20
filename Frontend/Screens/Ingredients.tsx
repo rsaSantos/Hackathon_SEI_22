@@ -6,41 +6,48 @@ import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-nativ
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
 import API from '../API/api'
-
-const ingredientes = [{
-
-    "ingrediente": "ola",
-    "pressed": false
-  },
-  {
-  
-    "ingrediente": "t",
-    "pressed": false
-  }
-  ]
-  
+import { useEmenta } from '../contexts/Ementa';
 
 
 
-
+let aux = []
 
 
 export default function Ingredients() {
-    
-    const route = useRoute<RouteProp<RootStackParamList,'Ingredients'>>();
-    const number = route.params.number
-  
+    const { ementa, setEmenta } = useEmenta();
 
+    function joinIngrediente(ing) {
+        return { "ingrediente": ing.nome + " " + ing.quantidade + " " + ing.sistemaNumerico, "pressed": false }
+    }
+
+    
+    
+    
+  
+    useEffect(() => {
     const request_test = async () => {
-        const dados = await API.get("/todasEmentas");  
+        const route = useRoute<RouteProp<RootStackParamList, 'Ingredients'>>();
+        const dados = await API.get("/nEmentas?numEmentas=" + route.params.number);  
         return dados.data;  
     };
-    
-    request_test().then((dados: any) => {
+    const [items, setItems] = useState([]);
+    //let dadosingredientes = []
+        await request_test().then(async(dados: any) => {
+            
+            
+        for(var i= 0; i < dados.todosIngredientes.length; i++) {
+            aux.push({ "ingrediente": dados.todosIngredientes[i].nome + " " + dados.todosIngredientes[i].quantidade + " " + dados.todosIngredientes[i].sistemaNumerico, "pressed": false })
+        }
+        setEmenta(dados.ementasInfo)
         
+        setItems(aux)
     });
+})
+    
 
-    const [items, setItems] = useState(ingredientes);
+    
+
+   
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -53,6 +60,7 @@ export default function Ingredients() {
         })
 
 
+
     function showIcon(pressed: boolean) {
         if (pressed) {
             return <Icon name="checkcircle" size={40} color="black" type="antdesign" />
@@ -60,8 +68,9 @@ export default function Ingredients() {
         else return <Icon name="checkcircleo" size={40} color="black" type="antdesign" />
     }
 
-
+    
     return (
+        
         <View style={Styles.container}>
             <FlatList data={items}
                 renderItem={({ item, index }) => 
@@ -72,7 +81,7 @@ export default function Ingredients() {
                             style={Styles.checkButton}>{showIcon(item.pressed)}</Pressable> 
                        
                     </View>}/>
-                <Text>{number}</Text>
+               
         </View>
 
     )
@@ -92,7 +101,7 @@ const Styles = StyleSheet.create({
         right: 0,
     },
     item: {
-        fontSize: 35,
+        fontSize: 25,
         left: 0,
 
     },

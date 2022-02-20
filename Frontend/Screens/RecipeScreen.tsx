@@ -17,8 +17,6 @@ export default function RecipeScreen() {
             <Text style={styles.subtitle}>Modo de Preparação</Text>
             <br></br>
             <Text style={styles.description}>{recipe.descricao}</Text>
-
-
         </View>
     )
 }

@@ -15,7 +15,7 @@ type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'RequestS
 
 export default function RequestScreen() {
   const navigation = useNavigation<RequestScreenProp>()
-  const {ementa, setEmenta} = useEmenta();
+  
 
   const [count, setCount] = useState(1)
   
