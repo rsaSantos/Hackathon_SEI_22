@@ -8,7 +8,7 @@ import Recipes from './Screens/Recipes'
 import RecipeScreen from './Screens/RecipeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ContextProvider from './contexts/Count';
-
+import ContexEmentaProvider from './contexts/Ementa'
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +17,7 @@ export default function App() {
   return (
 
     <NavigationContainer>
+      <ContexEmentaProvider>
       <ContextProvider>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={RequestScreen} />
@@ -25,6 +26,7 @@ export default function App() {
         <Tab.Screen name="Receita" component={RecipeScreen} initialParams={{nome: "parametro"}}/>
       </Tab.Navigator>
       </ContextProvider>
+      </ContexEmentaProvider>
 
     </NavigationContainer>
 

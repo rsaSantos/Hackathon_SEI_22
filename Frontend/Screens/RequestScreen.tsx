@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
+import {useCount} from '../contexts/Count';
 
 
 
@@ -14,7 +15,7 @@ type RequestScreenProp = NativeStackNavigationProp<RootStackParamList,'RequestSc
 export default function RequestScreen () {
   const navigation = useNavigation<RequestScreenProp>()
   
-  const [count, setCount] = useState(1)
+  const {count, setCount} = useCount()
   function subtractcount() {
     if (count > 1) {
       setCount(count - 1)
