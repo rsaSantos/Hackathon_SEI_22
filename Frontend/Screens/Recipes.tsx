@@ -3,14 +3,18 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackParamList } from '../stackParams';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
+import { useEmenta } from '../contexts/Ementa';
+import { useReceita } from '../contexts/Receita';
 
-type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'Receitas'>;
+type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'Receita'>;
 
 
 export default function Recepies() {
-    const [items, setItems] = useState(receitas);
+    const {ementa,setEmenta} = useEmenta();
+    const {receita,setReceita} = useReceita();
+    const [items, setItems] = useState([]);
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -21,6 +25,11 @@ export default function Recepies() {
                 return { ...item, pressed };
             })
         })
+        useEffect(() => {
+            const receitas = ementa.map((igr) => ({...igr, pressed: false}))
+            setItems(receitas)
+        },[ementa]
+        )
 
     function showIcon(pressed: boolean) {
         if (pressed) {
@@ -35,9 +44,13 @@ export default function Recepies() {
         <View style={Styles.container}>
             <FlatList data={items} renderItem={({ item, index }) =>
                 <View>
-                    <Pressable onPress={() => navigation.navigate('Receita',{nome: item.name})}
-                        style={Styles.recipeContainer}><img src={item.imgUrl} />
-                        <Text style={Styles.text}> {item.name} </Text></Pressable >
+                    <Pressable onPress={async () => {
+                            setReceita(item.nomeEmenta)
+                            
+                            navigation.navigate('Receita')
+                            }}
+                        style={Styles.recipeContainer}><img src={item.fotografia} />
+                        <Text style={Styles.text}> {item.nomeEmenta} </Text></Pressable >
                     <Pressable style={Styles.iconContainer} onPress={() => handleSelectItem(index)}>
                         {showIcon(item.pressed)}
                     </Pressable>
@@ -91,19 +104,3 @@ const Styles = StyleSheet.create({
 })
 
 
-var receitas = [{
-    "imgUrl": "https://www.pingodoce.pt/wp-content/uploads/2016/03/bacalhau-a-bras.jpeg",
-    "name": "Bacalhau à Bras",
-    "pressed": false
-},
-{
-    "imgUrl": "https://cdn.vidaativa.pt/uploads/2019/11/765_360_125734-vegetarian-shepherd-s-pie-potatoes-lentils-and-seasonal-garden-vegetables-casserole-a.jpg",
-    "name": "Empadão de seitan",
-    "pressed": false
-},
-{
-    "imgUrl": "https://tecnonoticias.com.br/wp-content/uploads/2021/10/receita-tradicional-de-massa-a-bolonhesa-.jpg",
-    "name": "Massa à bolonhesa",
-    "pressed": false
-},
-]

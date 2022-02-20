@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from '../stackParams';
+import { useReceita } from '../contexts/Receita';
+import API from '../API/api';
 
 
 export default function RecipeScreen() {
-    const route = useRoute<RouteProp<RootStackParamList, 'Receita'>>();
-    function findindex() {
-        if(route.params.nome === "Bacalhau à bras") return recipe['Bacalhau à brasa']
-        else if(route.params.nome === "Empadão de seitan") return recipe['Empadão de seitan']
-        else if(route.params.nome === "Massa à bolonhesa") return recipe['Massa à bolonhesa']
-        else return recipe['Bacalhau à brasa']
-    }
-    const receita = findindex()
+    const {receita, setReceita} = useReceita();
+    const [rec,setrec] = useState({})
+    
+    
+
+    useEffect(() => {
+        let r = receita
+        API.get(`/receita?nomeEmenta=${r}`).then((response) => {
+            setrec(response.data)
+            console.log(receita)
+            })
+        },[receita])
+
+        
     return (
         
         <View style={styles.container}>
             <ScrollView>
-                <Text style={styles.title}>{receita.nome}</Text>
-                <img src={receita.imgUrl} />
+                <Text style={styles.title}>{rec.ementaInfo.nomeEmenta}</Text>
+                <img src={rec.ementaInfo.fotografia} />
                 <Text style={styles.subtitle}>Ingredientes</Text>
-                <FlatList data={receita.ingredients} renderItem={({ item }) => <Text style={styles.item}>-{item}</Text>}></FlatList>
+                <FlatList data={rec.listaIngredientes} renderItem={({ item }) => <Text style={styles.item}>-{item}</Text>}></FlatList>
                 <br></br>
                 <Text style={styles.subtitle}>Modo de Preparação</Text>
                 <br></br>
-                <Text style={styles.description}>{receita.descricao}</Text>
+                <Text style={styles.description}>{rec.receita}</Text>
             </ScrollView>
 
 

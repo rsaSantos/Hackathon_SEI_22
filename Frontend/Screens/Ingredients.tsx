@@ -5,17 +5,22 @@ import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-nativ
 import { Icon } from 'react-native-elements';
 import API from '../API/api';
 import { useCount } from '../contexts/Count';
+import { useEmenta } from '../contexts/Ementa';
 
 
 export default function Ingredients() {
+    const {ementa,setEmenta} = useEmenta()
     const [items, setItems] = useState([]);
     const {count} = useCount();
 
     useEffect(() => {
         API.get(`/nEmentas?numEmentas=${count}`).then((response) => {
             const ingredientes = response.data.todosIngredientes.map((igr) => ({...igr, pressed: false}))
+            setEmenta(response.data.ementasInfo)
+            
             setItems(ingredientes);
         })
+        
     },[count])
 
     const handleSelectItem = (selectedItemIndex: Number) =>
