@@ -1,7 +1,7 @@
 
-import { useRoute } from '@react-navigation/native';
+
 import { useEffect, useState } from 'react';
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import API from '../API/api';
 import { useCount } from '../contexts/Count';
@@ -9,7 +9,7 @@ import { useEmenta } from '../contexts/Ementa';
 
 
 export default function Ingredients() {
-    const {ementa,setEmenta} = useEmenta()
+    const {setEmenta} = useEmenta()
     const [items, setItems] = useState([]);
     const {count} = useCount();
 

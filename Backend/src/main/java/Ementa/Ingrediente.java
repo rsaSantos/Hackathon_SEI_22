@@ -1,6 +1,5 @@
 package Ementa;
 
-import Controller.Controller;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackParamList } from '../stackParams';
 import { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
@@ -12,9 +12,15 @@ type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'Receita'
 
 
 export default function Recepies() {
-    const {ementa,setEmenta} = useEmenta();
-    const {receita,setReceita} = useReceita();
+    const {ementa} = useEmenta();
+    const {setReceita} = useReceita();
     const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        const receitas = ementa.map((igr) => ({...igr, pressed: false}))
+        setItems(receitas)
+    },[ementa]
+    )
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -25,11 +31,7 @@ export default function Recepies() {
                 return { ...item, pressed };
             })
         })
-        useEffect(() => {
-            const receitas = ementa.map((igr) => ({...igr, pressed: false}))
-            setItems(receitas)
-        },[ementa]
-        )
+        
 
     function showIcon(pressed: boolean) {
         if (pressed) {
@@ -44,8 +46,9 @@ export default function Recepies() {
         <View style={Styles.container}>
             <FlatList data={items} renderItem={({ item, index }) =>
                 <View>
-                    <Pressable onPress={async () => {
+                    <Pressable onPress={() => {
                             setReceita(item.nomeEmenta)
+                            
                             
                             navigation.navigate('Receita')
                             }}

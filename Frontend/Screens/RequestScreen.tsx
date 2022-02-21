@@ -1,7 +1,6 @@
-import { NavigationContainer, StackNavigationState, useNavigation } from '@react-navigation/native';
+import {useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';

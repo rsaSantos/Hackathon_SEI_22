@@ -1,9 +1,5 @@
 package Database;
 
-import Controller.Controller;
-import Ementa.Ementa;
-import Ementa.Ingrediente;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Ementa.Ementa;
+import Ementa.Ingrediente;
 
 
 public class EmentaDAO {

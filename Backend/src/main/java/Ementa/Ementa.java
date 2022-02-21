@@ -1,11 +1,11 @@
 package Ementa;
 
-import Controller.Controller;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import Controller.Controller;
 
 /// A classe Ementa representa uma refeição.
 public class Ementa implements Serializable {
@@ -62,6 +62,10 @@ public class Ementa implements Serializable {
 
     public EmentaInfo getEmentaInfo() {
         return ementaInfo.clone();
+    }
+
+    public String getReceita() {
+        return this.receita;
     }
 
     public void setEmentaInfo(EmentaInfo ementaInfo) {
