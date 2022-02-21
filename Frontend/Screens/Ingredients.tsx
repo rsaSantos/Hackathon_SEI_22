@@ -14,6 +14,7 @@ export default function Ingredients() {
     const {count} = useCount();
 
     useEffect(() => {
+        
         API.get(`/nEmentas?numEmentas=${count}`).then((response) => {
             const ingredientes = response.data.todosIngredientes.map((igr) => ({...igr, pressed: false}))
             setEmenta(response.data.ementasInfo)

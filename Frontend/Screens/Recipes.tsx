@@ -7,20 +7,40 @@ import { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
 import { useEmenta } from '../contexts/Ementa';
 import { useReceita } from '../contexts/Receita';
+import API from '../API/api';
 
-type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'Receita'>;
+type RequestScreenProp = NativeStackNavigationProp<RootStackParamList, 'Receitas'>;
 
 
 export default function Recepies() {
-    const {ementa} = useEmenta();
-    const {setReceita} = useReceita();
-    const [items, setItems] = useState([]);
+    const { ementa } = useEmenta();
+    const { setReceita } = useReceita();
+    const [items, setItems] = useState(receitasPrompt);
 
     useEffect(() => {
-        const receitas = ementa.map((igr) => ({...igr, pressed: false}))
-        setItems(receitas)
-    },[ementa]
+        if (ementa != null) {
+            const receitas = ementa.map((igr) => ({ ...igr, pressed: false }))
+            setItems(receitas)
+        }
+    }, [ementa]
     )
+
+    function exchange() {
+            let sending_items = "";
+            for(var i = 0; i < items.length; i++) {
+                console.log(items[i].nomeEmenta)
+                sending_items += items[i].nomeEmenta + "," + items[i].pressed + ";"
+            }
+            
+        API.get(`/mudaPlano?nomeEmentas=${sending_items}`).then((response) => {
+            
+            if(response.data != {"ementasInfo":[],"todosIngredientes":[]}) {
+                const receitas = response.data.ementasInfo.map((igr) => ({ ...igr, pressed: false }))
+                setItems(receitas)
+            }
+
+        })
+    }
 
     const handleSelectItem = (selectedItemIndex: Number) =>
         setItems((old) => {
@@ -31,7 +51,8 @@ export default function Recepies() {
                 return { ...item, pressed };
             })
         })
-        
+
+
 
     function showIcon(pressed: boolean) {
         if (pressed) {
@@ -47,18 +68,18 @@ export default function Recepies() {
             <FlatList data={items} renderItem={({ item, index }) =>
                 <View>
                     <Pressable onPress={() => {
-                            setReceita(item.nomeEmenta)
-                            
-                            
-                            navigation.navigate('Receita')
-                            }}
+                        setReceita(item.nomeEmenta)
+
+
+                        navigation.navigate('Receita')
+                    }}
                         style={Styles.recipeContainer}><img src={item.fotografia} />
                         <Text style={Styles.text}> {item.nomeEmenta} </Text></Pressable >
                     <Pressable style={Styles.iconContainer} onPress={() => handleSelectItem(index)}>
                         {showIcon(item.pressed)}
                     </Pressable>
                 </View>} />
-            <Pressable style={Styles.changeButton}><Icon name="exchange" size={40} color="black" type="font-awesome" /> </Pressable>
+            <Pressable style={Styles.changeButton} onPress={() => exchange()}><Icon name="exchange" size={40} color="black" type="font-awesome" /> </Pressable>
         </View >
     )
 }
@@ -107,3 +128,8 @@ const Styles = StyleSheet.create({
 })
 
 
+var receitasPrompt = [{
+    "nomeEmenta": "no Ementas selected",
+    "fotografia": "https://media.istockphoto.com/photos/computer-error-picture-id1222806141?k=20&m=1222806141&s=612x612&w=0&h=GoODCHnR0mSefDBLWJpnqVnfRKH9ttdYPO0-KEYbb7w=",
+    "pressed": false
+}]

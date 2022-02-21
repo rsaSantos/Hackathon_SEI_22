@@ -65,22 +65,13 @@ const styles = StyleSheet.create({
 
 var recipe = {
     "ementaInfo": {
-        "nomeEmenta": "Bacalhau à bras",
-        "fotografia": "https://www.pingodoce.pt/wp-content/uploads/2016/03/bacalhau-a-bras.jpeg"
+        "nomeEmenta": "Error",
+        "fotografia": "https://media.istockphoto.com/photos/computer-error-picture-id1222806141?k=20&m=1222806141&s=612x612&w=0&h=GoODCHnR0mSefDBLWJpnqVnfRKH9ttdYPO0-KEYbb7w="
             },
     "listaIngredientes": [
-        {
-            "nome": "Azeite",
-            "quantidade": 15,
-            "sistemaNumerico": "ml"
-          },
-          {
-            "nome": "Batata",
-            "quantidade": 1000,
-            "sistemaNumerico": "gr"
-          }
+       
     ],
-    "receita": "1. Coza as postas de bacalhau em leite.\n2. Corte a cebola em rodelas finas e refogue em azeite até estar mole e transparente.\n3. Escorra o bacalhau e desfaça-o em lascas e junte à cebolada. Deixe refogar lentamente. Polvilhe com farinha, mexa e regue com leite coado, onde cozeu antes o bacalhau. Deixe engrossar, mexendo de vez em quando.\n4. Descasque e corte as batatas em cubos e frite em óleo não quente, de forma a deixá-las mais cozidas que fritas. Escorra as batatas e junte-as ao bacalhau. Tempere com sal, pimenta e noz-moscada.\n5. Deite tudo num tabuleiro untado de ir ao forno, espalhe por cima as natas e polvilhe com queijo ralado. Leve ao forno até estar gratinado.\nSirva com uma salada fresca de alface e tomate."
+    "receita": "Not defined"
 
 }
         

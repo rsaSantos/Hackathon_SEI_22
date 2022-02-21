@@ -5,6 +5,8 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RootStackParamList } from '../stackParams';
 import {useCount} from '../contexts/Count';
+import API from '../API/api';
+import { useEmenta } from '../contexts/Ementa';
 
 
 
@@ -13,8 +15,10 @@ type RequestScreenProp = NativeStackNavigationProp<RootStackParamList,'RequestSc
 
 export default function RequestScreen () {
   const navigation = useNavigation<RequestScreenProp>()
-  
+  const {setEmenta} = useEmenta()
   const {count, setCount} = useCount()
+
+  
   function subtractcount() {
     if (count > 1) {
       setCount(count - 1)
@@ -23,6 +27,13 @@ export default function RequestScreen () {
   function addcount() {
     setCount(count + 1)
   }
+
+  function allReceitas() {
+    API.get(`/todasEmentas`).then((response) => {
+      setEmenta(response.data)
+    })}
+
+
   return (
     
     <View style={styles.container} >
@@ -33,7 +44,10 @@ export default function RequestScreen () {
         <Pressable onPress={addcount}><Icon name="pluscircleo" size={80} color="black" type= "antdesign" /></Pressable>
       </View>
       <Pressable onPress={() => navigation.navigate('Lista_de_Compras')} style={styles.calculateContainer}>Gerar Lista de Compras</Pressable>
-      <Pressable onPress={() => navigation.navigate('Receitas')} style={styles.allContainer}>Ver todas as Receitas</Pressable>
+      <Pressable onPress={() => {
+                            allReceitas()
+                            navigation.navigate('Receitas')}} style={styles.allContainer}>Ver todas as Receitas</Pressable>
+
       
       <StatusBar style="auto" />
     </View>
